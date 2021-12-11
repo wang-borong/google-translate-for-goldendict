@@ -17,7 +17,7 @@ import asyncio
 from functools import partial
 import re
 import argparse
-from .googletranslatetk import Token
+from googletranslatetk import Token
 
 
 class GoogleTranslate(object):
@@ -36,7 +36,7 @@ class GoogleTranslate(object):
         self.result = ''
 
     def get_url(self, tl, qry, tk):
-        url = f'https://{self.http_host}/translate_a/single?client=webapp&sl=auto&tl={tl}&hl=en&dt=at&dt=bd&dt=ex&' \
+        url = f'https://{self.http_host}/translate_a/single?client=gtx&sl=auto&tl={tl}&hl=en&dt=at&dt=bd&dt=ex&' \
               f'dt=ld&dt=md&dt=qca&dt=rw&dt=rm&dt=sos&dt=ss&dt=t&ssel=0&tsel=0&kc=1&tk={tk}&q={qry}'
         return url
 
@@ -82,7 +82,7 @@ class GoogleTranslate(object):
             'http': f'http://{self.http_proxy.strip() if self.http_proxy.strip() else "127.0.0.1:1080"}',
             'https': f'http://{self.http_proxy.strip() if self.http_proxy.strip() else "127.0.0.1:1080"}'
         }
-        base_headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'}
+        base_headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:96.0) Gecko/20100101 Firefox/96.0'}
         session = requests.Session()
         session.headers = base_headers
         resp = session.get(url, proxies=proxies if self.http_proxy.strip() else None, timeout=5).json()
@@ -151,7 +151,7 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('target', type=str, default='en', help=f'target language, eg: zh-CN, {default}')
     parser.add_argument('query', type=str, default='', help='query string')
-    parser.add_argument('-s', dest='host', type=str, default='translate.google.com', help=f'host name {default}')
+    parser.add_argument('-s', dest='host', type=str, default='translate.googleapis.com', help=f'host name {default}')
     parser.add_argument('-p', dest='proxy', type=str, default='', help='proxy server (eg: 127.0.0.1:1080)')
     parser.add_argument('-a', dest='alternative', type=str, default='en', help=f'alternative language {default}')
     parser.add_argument('-r', dest='type', type=str, default='html', help=f'result type {default}')
