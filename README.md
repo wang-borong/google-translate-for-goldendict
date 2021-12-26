@@ -21,14 +21,6 @@ GoldenDict - 编辑 - 字典 - 字典来源 - 程式
 
 图示: `H:\PathTo\google_translate.png`
 
-**Tips**
-
-默认设置不能使用的可以尝试将 `http_host` 设为: `translate.google.cn`.
-
-```
-python -m googletranslate zh-CN %GDWORD% -s "translate.google.cn"
-```
-
 类型可以设为 `Html` 或 `纯文本`.
 
 其中: `Html` 对应 `-r "html"`. `纯文本` 对应 `-r "plain"`
@@ -40,7 +32,6 @@ positional arguments:
 
 optional arguments:
   -h, --help      show this help message and exit
-  -s HOST         host name (default: translate.google.com)
   -p PROXY        proxy server (eg: 127.0.0.1:1080)
   -a ALTERNATIVE  alternative language (default: en)
   -r TYPE         result type (default: html)
