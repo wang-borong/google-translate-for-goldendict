@@ -121,10 +121,11 @@ class GoogleTranslate(object):
             if resp[2] == self.target_language:
                 self.result += f'^_^: Translate {resp[2]} To {self.alternative_language}\n'
                 self.get_result(resp)
+                self.result += '---------\n'
                 self.get_result(resp_alt)
                 self.get_synonym(resp_alt)
             else:
-                self.result += f'^_^: Translate {resp[2]} To {self.target_language}\n{self.query_string}\n'
+                self.result += f'^_^: Translate {resp[2]} To {self.target_language}\n{self.query_string}\n---------\n'
                 self.get_result(resp)
                 self.get_synonym(resp)
             if self.synonyms_en and len(resp) >= 12 and resp[11]:
