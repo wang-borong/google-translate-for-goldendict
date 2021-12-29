@@ -53,10 +53,10 @@ class GoogleTranslate(object):
     def get_result(self, resp):
         for x in resp[0]:
             self.result += x[0] if x[0] else ''
-        self.result += '\n'
+        #self.result += '\n'
 
     def get_definitions(self, resp):
-        self.result += '\n\n'
+        self.result += '\n'
         self.result += f'⭐ Definitions of {self.query_string}\n'
         for x in resp[12]:
             self.result += f'🎯 {x[0] if x[0] else ""}.\n'
@@ -65,13 +65,13 @@ class GoogleTranslate(object):
                 self.result += f'    * {y[2]}\n' if len(y) >= 3 else ''
 
     def get_examples(self, resp):
-        self.result += '\n\n'
+        self.result += '\n'
         self.result += f'⭐ Examples of {self.query_string}\n'
         for x in resp[13][0]:
             self.result += f'  * {x[0]}\n'
 
     def get_synonyms_en(self, resp):
-        self.result += '\n\n'
+        self.result += '\n'
         self.result += f'⭐ Synonyms of {self.query_string}\n'
         for idx, x in enumerate(resp[11]):
             self.result += f'🎯 {x[0]}.\n'
@@ -131,13 +131,12 @@ class GoogleTranslate(object):
                                             partial(self.get_resp, url_alt))
             [resp, resp_alt] = await asyncio.gather(resp, resp_alt)
             if resp[2] == self.target_language:
-                self.result += f'Translate {resp[2]} To {self.alternative_language}\n'
                 self.get_result(resp)
                 self.result += '\n'
                 self.get_result(resp_alt)
                 self.get_synonym(resp_alt)
             else:
-                self.result += f'\n{self.query_string}\n'
+                self.result += f'{self.query_string}\n'
                 self.get_result(resp)
                 self.get_synonym(resp)
             if self.synonyms_en and len(resp) >= 12 and resp[11]:
